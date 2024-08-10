@@ -1,7 +1,7 @@
 import  { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function HZ_Protected({ Component }:any) {
+function Protected({ Component }:any) {
 
     const [ loader , setLoader ] = useState(true);
     
@@ -23,4 +23,4 @@ function HZ_Protected({ Component }:any) {
   )
 }
 
-export default HZ_Protected
+export default Protected
