@@ -1,0 +1,40 @@
+/* <Navbar
+links={[
+  {
+    to: "/userMain",
+    label: "Bookings",
+  },
+  {
+    to: "/profilepage",
+    label: "Profile Page",
+  },
+]}
+/> */
+
+/* <Grid container spacing={2}>
+{transportData && transportData.length > 0 ? (
+  transportData.map((e, i) => (
+    <Grid
+      item
+      key={i}
+      md={5}
+      style={{
+        backgroundColor: "#008E57",
+        borderRadius: "15px",
+        color: "white",
+        boxShadow:
+          "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+      }}
+      className="p-4 mx-5 my-2"
+    > */
+
+    /* <EZ_FullScreenLoader height="80vh" /> */
+
+    /* const getProfileData = () => {
+      getData("users").then((data) => {
+        data = data.filter((user) => user.category === "user");
+        setUsers(data);
+        // let arr = users.filter((user) => user.category === "user");
+        setCurrentUser([...data]);
+      });
+    }; */

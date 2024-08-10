@@ -1,24 +1,20 @@
 // import Approuter from "./config/router"
 import 'bootstrap/dist/css/bootstrap.css'
 import Approuter from './config/router'
-import { Provider } from 'react-redux'
-import store from './config/redux/store'
+import {  useSelector } from 'react-redux'
 
 
 
 function App() {
 
-
- 
-  
+  const dataFromStore = useSelector((state:any) => state.loginReducer);
+  console.log(dataFromStore);
 
   return (
    
    <>
-   <Provider store={store}>
 
     <Approuter/>  
-   </Provider>
    </>
    
   )
