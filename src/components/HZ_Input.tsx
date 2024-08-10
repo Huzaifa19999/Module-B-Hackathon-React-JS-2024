@@ -10,9 +10,8 @@ type InpProps = {
     required?:true,
     // fullWidth?:boolean,
     margin?:string,
-    className:string,
-    placeholder?:string,
-
+    className:string
+    placeholder:string
 }
 
 
@@ -26,13 +25,12 @@ function HZ_Input(props:InpProps) {
             type,
             required,
             className,
-            label
-           } = props 
+            label } = props 
 
   return (
     <div>
            {/* <label className="form-label">{label}</label> */}
-            <TextField
+            <TextField 
                    type={type}
                    className={className}
                   //  placeholder={placeholder}

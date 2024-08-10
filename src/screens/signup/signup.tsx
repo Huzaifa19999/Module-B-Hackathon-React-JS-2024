@@ -1,100 +1,104 @@
-import  { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import { useState } from 'react';
+import './signup.css'
+import { useNavigate } from 'react-router-dom';
+// import HZ_Button from '../../components/HZ_Button';
+import { sendData , signUpUser } from '../../config/firebase/firebaseMethod';
+import { Button } from '@mui/material';
+import HZ_Input from '../../components/HZ_Input';
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../../config/redux/reducer/loginReducer';
 
-const Signup = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
+function Signup() {
+  const [name, setName] = useState<any>('');
+  const [email, setEmail] = useState<any>('');
+  const [password, setPassword] = useState<any>('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
-  const { name, email, password, confirmPassword } = formData;
+  const signupDetails = useSelector((a:any)=>a.signup.signupDetail)
+  console.log(signupDetails)
 
-  const handleChange = (e:any) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
 
-  const handleSubmit = (e:any) => {
+  const enterLogin = (e: any) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
+    if (name && email && password) {
+      let obj = {
+        Name:name,
+        Email: email,
+        Password: password
+      };
+
+      signUpUser(name,email,password)
+      
+      sendData('Signup', obj)
+      .then((res) => {
+        console.log("Successfully Added", res);
+        navigate('/home/user');
+        alert("Successfully Log In");
+      })
+      .catch((err) => {
+        console.log("Data not Added", err);
+        alert("Login failed");
+      });
+      setName('');
+      setEmail('');
+      setPassword('');
+    } else {
+      alert("Fill the field");
     }
-    // Handle signup logic here
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
+
+    dispatch(add({name,email,password}))
+
   };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
-      <Row>
-        <Col md={6} lg={4}>
-          <div className="border p-4 rounded shadow">
-            <h2 className="mb-4">Sign Up</h2>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter your name"
-                  name="name"
-                  value={name}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
+    <div className="login-container">
+      <div className="login-card">
+        <h2 className="login-title">
+          Sign Up
+          </h2>
 
-              <Form.Group controlId="formEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter your email"
-                  name="email"
-                  value={email}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Enter your password"
-                  name="password"
-                  value={password}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group controlId="formConfirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Confirm your password"
-                  name="confirmPassword"
-                  value={confirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Sign Up
-              </Button>
-            </Form>
+        <form onSubmit={enterLogin}>
+          <div className="mb-3 text-center fw-bold">
+            <HZ_Input
+              label="User name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className='' 
+              placeholder='Enter your Email'/>
           </div>
-        </Col>
-      </Row>
-    </Container>
+          <div className="mb-3 text-center fw-bold">
+            <HZ_Input
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className='' 
+              placeholder='Enter your Email'/>
+          </div>
+          <div className="mb-3 text-center fw-bold">
+            <HZ_Input
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className=''
+              placeholder='Enter your password'
+            />
+          </div>
+          {/* <HZ_Button onClick={enterLogin} className='login-button fw-bold' label='Login' type={undefined}/>*/}
+          <Button className='w-100 fw-bold' variant='contained' onClick={enterLogin}>Login</Button>
+          <p onClick={()=>{navigate('/')}} className='mt-4 text-light text-center'>Already have account ? Click to Log In</p>
+
+          </form>
+      </div>
+    </div>
   );
-};
+}
 
 export default Signup;

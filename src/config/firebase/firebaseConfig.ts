@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyATZ-F4VpAyKT69ObwlH9DlNGHfMvCmVDs",
   authDomain: "hackathon-react-js.firebaseapp.com",
+  databaseURL: "https://hackathon-react-js-default-rtdb.firebaseio.com",
   projectId: "hackathon-react-js",
   storageBucket: "hackathon-react-js.appspot.com",
   messagingSenderId: "3176620789",
