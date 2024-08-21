@@ -6,12 +6,13 @@ import "./HZ_Navbar.css"
 
 type Navprops = {
 
-  links:any
+  links:any,
+  title:string
 }
 
 export default function HZ_Navbar(props:Navprops) {
 
-  const {links} = props
+  const {links,title} = props
 
   let [menu, setMenu] = useState<any>("true");
   let [activeMenu, setActiveMenu] = useState("navLinks");
@@ -27,14 +28,15 @@ export default function HZ_Navbar(props:Navprops) {
           display: "flex",
           alignItems: "center",
           gap: "15px",
-          color: "#202020",
+          color: "white",
           fontWeight: "bolder",
+          fontSize: "xx-large"
         }}
       >
-        TRANSPORT BOOKING APPLICATION
+        {title}
       </div>
 
-      <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+      <div style={{ marginLeft: "auto", marginRight: "auto"}}>
         <ul className={activeMenu}>
           {links.map((item:any, index:any) => (
             <NavLink

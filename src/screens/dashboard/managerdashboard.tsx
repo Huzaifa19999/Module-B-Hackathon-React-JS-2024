@@ -13,22 +13,22 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import HZ_TreeView from './HZ_TreeView';
+import HZ_TreeView from '../../components/HZ_TreeView';
 import { AccountCircle,  Logout, Person, Quiz, SupervisedUserCircle } from '@mui/icons-material';
 import PaymentIcon from '@mui/icons-material/Payment';
-import Notfound from '../screens/notFound/notfound';
+import Notfound from '../notFound/notfound';
 // import User from '../screens/Home/homeuser';
-import '../App.css'
-import { signOutUser } from '../config/firebase/firebaseMethod';
-import HZ_NewPassword from '../components/HZ_NewPassword';
-import User from '../screens/users/user';
-import Home from '../screens/home/home';
-import StaffManagment from '../screens/StaffManagement/staffManagment';
-import StaffRecords from '../screens/StaffManagement/staffRecord';
-import Room from '../screens/RoomManagment/room';
-import Customer from '../screens/CustomerManagement/customer';
-import CustomerRecord from '../screens/CustomerManagement/customerRecord';
-import Payment from '../screens/PaymentManagement/payment';
+import '../../App.css'
+import { signOutUser } from '../../config/firebase/firebaseMethod';
+import HZ_NewPassword from '../../components/HZ_NewPassword'
+import Users from '../users/user';
+import StaffManagment from '../StaffManagement/staffManagment';
+
+import Room from '../RoomManagment/room';
+import Payment from '../PaymentManagement/payment';
+import Customer from '../CustomerManagement/customer';
+import CustomerRecord from '../CustomerManagement/customerRecord';
+import StaffRecords from '../StaffManagement/staffRecord';
 
 const drawerWidth = 240;
 
@@ -97,7 +97,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function HZ_Dashboard() {
+export default function ManagerDashboard() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
@@ -122,97 +122,27 @@ export default function HZ_Dashboard() {
  
   const [treeStructure] = React.useState([
     {
-      moduleName: "Login",
-      icon: <AccountCircle />,
-      child: [
-        {
-          name: 'Users',
-          route: 'users',
-        },
-      ],
-    },
-    {
-      moduleName: "Customer",
-      icon: <AccountCircle />,
-      child: [
-        {
-          name: 'Customer Managment',
-          route: 'customermanagement',
-        },
-        {
-          name: 'Booking',
-          route: 'booking',
-        }
-      ],
-    },
-    {
-      moduleName: "Room",
-      icon: <Person />,
-      child: [
-        {
-          name: 'Room Booking',
-          route: 'roommanagement',
-        },
-        {
-          name: 'Room Record',
-          route: 'roomrecord',
-        },
-      ],
-    },
-    {
-      moduleName: "Payment",
-      icon: <PaymentIcon />,
-      child: [
-        {
-          name: 'Payment Management',
-          route: 'paymentmanagement',
-        },
-        {
-          name: 'Booking',
-          route: 'booking',
-        }
-      ],
-    },
-    {
       moduleName: "Staff",
-      icon: <Quiz />,
+      icon: <AccountCircle />,
       child: [
         {
-          name: 'Staff Management',
-          route: 'staffmanagement',
+          name: 'Booking Details',
+          route: 'staff/details',
         },
         {
-          name: 'Staff Records',
-          route: 'staffrecords',
+          name: 'Identity Verification',
+          route: 'staff/verification',
+        },
+        {
+          name: 'Status',
+          route: 'staff/status',
+        },
+        {
+          name: 'Checkout',
+          route: 'staff/checkout',
         },
       ],
-    },
-    {
-      moduleName: "Admin",
-      icon: <SupervisedUserCircle />,
-      child: [
-        {
-          name: 'Users',
-          route: 'users',
-        },
-        {
-          name: 'Booking',
-          route: 'bookingrecord',
-        },
-        {
-          name: 'Room',
-          route: 'roomrecord',
-        },
-        {
-          name: 'Customer',
-          route: 'customerrecord',
-        },
-        {
-          name: 'Payment',
-          route: 'paymentrecord',
-        },
-      ],
-    },
+    }
     
   ]);
 
@@ -255,12 +185,12 @@ export default function HZ_Dashboard() {
         <Routes>
           <Route path='*' element={<Notfound />} />
           {/* <Route path='home' element={<Home />} /> */}
-          <Route path='users' element={<User />} />
+          <Route path='users' element={<Users />} />
           <Route path='paymentmanagement' element={<Payment />} />
           <Route path='customermanagement' element={<Customer />} />
           <Route path='customerrecord' element={<CustomerRecord />} />
           <Route path='staffmanagement' element={<StaffManagment />} />
-          <Route path='staffrecords' element={<StaffRecords />} />
+          <Route path='staffrecords' element={<StaffRecords/>} />
           <Route path='roommanagement' element={<Room />} />
           {/* <Route path='user' element={<User />} /> */}
           <Route path='newPassword' element={<HZ_NewPassword />} />

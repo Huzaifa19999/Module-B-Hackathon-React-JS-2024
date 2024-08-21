@@ -14,12 +14,12 @@ export default function HZ_TreeView({ treeStructure }: any) {
     const navigate = useNavigate();
 
     const navigateScreen = (route: string) => {
-        navigate(`/home/${route}`);
+        navigate(`/dashboard/${route}`);
     };
 
     const changePassword = () => {
 
-        navigate('/home/newpassword')
+        navigate('/dashboard/newpassword')
       }
     
 
